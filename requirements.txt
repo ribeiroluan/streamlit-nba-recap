@@ -2,7 +2,6 @@ streamlit
 pandas
 nba_api
 matplotlib
-matplotlib.pyplot
 plotly.express
 xlsxwriter
 os
