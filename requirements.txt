@@ -4,5 +4,3 @@ nba_api
 matplotlib
 plotly.express
 xlsxwriter
-os
-io
