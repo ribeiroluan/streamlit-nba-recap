@@ -10,7 +10,6 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import plotly.express as px
 #Other
-import os
 from io import BytesIO
 
 st.set_page_config(
@@ -18,8 +17,6 @@ st.set_page_config(
      page_icon=":basketball:",
      layout="centered",
      initial_sidebar_state="expanded")
-
-pwd = os.getcwd()
 
 header = st.container()
 awards = st.container()
@@ -107,7 +104,7 @@ with awards:
 	st.write(f"Check out the award winners of the {year_adjusted} season!")
 
 	#Reading awards table
-	awards = pd.read_excel(pwd+'\\nba-awards.xlsx', sheet_name='Awards')
+	awards = pd.read_excel('nba-awards.xlsx', sheet_name='Awards')
 
 	def get_awards_winners(year):
 	    return {'champion':awards[awards['year']==year].iloc[0]['champion'],
