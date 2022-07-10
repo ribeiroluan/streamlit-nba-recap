@@ -5,3 +5,5 @@ matplotlib
 plotly.express
 xlsxwriter
 lxml
+io
+openpyxl
