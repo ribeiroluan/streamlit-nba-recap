@@ -1,0 +1,11 @@
+streamlit
+pandas
+nba_api
+nba_api.stats.static
+nba_api.stats.endpoints
+matplotlib
+matplotlib.pyplot
+plotly.express
+xlsxwriter
+os
+io
