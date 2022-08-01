@@ -13,7 +13,7 @@ Check it out!
 ### Data sources
 
 The Streamlit web app pulls data from two main sources based on the selections on the app widgets.
-- [Basketball Reference](https://www.basketball-reference.com/): per game stats are scrapped directly from Basketball Reference. Meanwhile, the awards winners data is a  static table pulled from Basketball Reference, given that it does not need constant updates.
+- [Basketball Reference](https://www.basketball-reference.com/): per game stats are scrapped directly from Basketball Reference. Meanwhile, the awards winners data is a  static table pulled from Basketball Reference, given that it does not need constant updates since awards are given once a year.
 - [NBA API](https://github.com/swar/nba_api): the shot chart graph sends requests to the NBA API to pull the data of made and missed shots.
 
 ### How to deploy the web app
