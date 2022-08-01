@@ -7,7 +7,7 @@ This web app was created as a part of exploring `Streamlit` as a method to deplo
 Check it out!
 
 <p align = "center">
-    <img src="nba-recap-demo.gif" width = 900>
+    <img src="nba-recap-demo.gif" width = 800>
 </p>
 
 ### Data sources
