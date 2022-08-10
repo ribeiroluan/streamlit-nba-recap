@@ -9,6 +9,8 @@ from nba_api.stats.endpoints import shotchartdetail
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import plotly.express as px
+#Requests
+import requests
 #Other
 from io import BytesIO
 
@@ -28,8 +30,11 @@ pergame = st.container()
 def read_data(year):
 	#Reading per-game table from basketballrefence
 	url = f"https://www.basketball-reference.com//leagues/NBA_{year}_per_game.html"
-	html = pd.read_html(url, header=0)
-	df = html[0]
+	header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
+  			  "X-Requested-With": "XMLHttpRequest"}
+	r = requests.get(url, headers=header)
+	dfs = pd.read_html(r.text)
+	df = dfs[0]
 
 	#Manipulating dataframe
 	df.drop(['Rk'], axis=1, inplace = True)
