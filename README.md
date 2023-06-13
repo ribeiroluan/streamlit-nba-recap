@@ -18,7 +18,7 @@ The Streamlit web app pulls data from two main sources based on the selections o
 
 ### How to deploy the web app
 
-I tried to deploy the web app using `Heroku`, but had some challenges. The web app does not fully work due to the fact that the NBA API blocks requests coming from cloud providers, which are used by Heroku. You can check the app [here](https://nba-seasons-recap.herokuapp.com/). Therefore, I am leaving a sugestion on how to run the web app locally.
+I tried to deploy the web app using `Heroku`, but had some challenges. The web app does not fully work due to the fact that the NBA API blocks requests coming from cloud providers, which are used by Heroku. Therefore, I am leaving a sugestion on how to run the web app locally.
 
 ```
 git clone https://github.com/ribeiroluan/streamlit-nba-recap
