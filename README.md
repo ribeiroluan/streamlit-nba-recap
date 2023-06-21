@@ -20,7 +20,7 @@ The Streamlit web app pulls data from two main sources based on the selections o
 
 ## How to deploy the web app locally
 
-Bellow, I am leaving a sugestion on how to run the web app locally.
+Below, I am leaving a sugestion on how to run the web app locally.
 
 ```
 git clone https://github.com/ribeiroluan/streamlit-nba-recap
