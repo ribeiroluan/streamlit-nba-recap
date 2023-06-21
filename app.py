@@ -97,7 +97,8 @@ with st.sidebar:
     #Shot chart
     st.write("#### :point_right: Shot chart inputs")
     #shotchart_player = st.text_input("Type player name for the shot chart")
-    shotchart_player = st.selectbox("Type player name for the shot chart", list(read_data(year)['Player']))
+    players_list = list(read_data(year)['Player'])
+    shotchart_player = st.selectbox("Type player name for the shot chart", players_list, index = players_list.index('Stephen Curry'))
     
     #Per game stats
     st.write("#### :point_right: Per game stats inputs")
