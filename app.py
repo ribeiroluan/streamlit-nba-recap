@@ -284,4 +284,4 @@ with pergame:
          )
 
     else:
-        st.warning(':warning: Select teams and positions in the sidebar.teste3')
+        st.warning(':warning: Select teams and positions in the sidebar.')
