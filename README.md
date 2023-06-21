@@ -9,7 +9,7 @@ The web app is hosted on the Streamlit Community Cloud, and you can check it out
 Check it out!
 
 <p align = "center">
-    <img src="nba-recap-demo.gif" width = 800>
+    <img src="resources/nba-recap-demo.gif" width = 800>
 </p>
 
 ## Data sources

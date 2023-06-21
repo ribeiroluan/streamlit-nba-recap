@@ -109,7 +109,7 @@ with awards:
     st.write(f"Check out the award winners of the {year_adjusted} season!")
 
     #Reading awards table
-    awards = pd.read_excel('nba-awards.xlsx', sheet_name='Awards')
+    awards = pd.read_excel('resources/nba-awards.xlsx', sheet_name='Awards')
 
     def get_awards_winners(year):
         return {'champion':awards[awards['year']==year].iloc[0]['champion'],
