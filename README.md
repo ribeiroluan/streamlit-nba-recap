@@ -1,8 +1,12 @@
-# streamlit-nba-recap
+# NBA Recap :basketball:
 
-### Description
+## Description
+___
 
-This web app was created as a part of exploring `Streamlit` as a method to deploy data projects. It is directed to people who, like me, love NBA basketball and want to recap the main events from seasons going back to 1980 - award winners, season leaders, shot charts for individual players, per game stats.
+
+This web app was created as a part of exploring `Streamlit` as a method to deploy data projects. It is directed to people who, like me, love NBA basketball and want to recap the main events from seasons going back to 1980 - award winners, season leaders, shot charts for individual players and per game stats. 
+
+The web app is hosted on the Streamlit Community Cloud, and you can check it out [here](https://nbarecap.streamlit.app/)! 
 
 Check it out!
 
@@ -10,15 +14,17 @@ Check it out!
     <img src="nba-recap-demo.gif" width = 800>
 </p>
 
-### Data sources
+## Data sources
+___
 
 The Streamlit web app pulls data from two main sources based on the selections on the app widgets.
 - [Basketball Reference](https://www.basketball-reference.com/): per game stats are scrapped directly from Basketball Reference. Meanwhile, the awards winners data is a  static table pulled from Basketball Reference, given that it does not need constant updates since awards are given once a year.
 - [NBA API](https://github.com/swar/nba_api): the shot chart graph sends requests to the NBA API to pull the data of made and missed shots.
 
-### How to deploy the web app
+## How to deploy the web app locally
+___
 
-I tried to deploy the web app using `Heroku`, but had some challenges. The web app does not fully work due to the fact that the NBA API blocks requests coming from cloud providers, which are used by Heroku. Therefore, I am leaving a sugestion on how to run the web app locally.
+Bellow, I am leaving a sugestion on how to run the web app locally.
 
 ```
 git clone https://github.com/ribeiroluan/streamlit-nba-recap
@@ -33,7 +39,8 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-### References
+## References
+___
 
 - Chanin Nantasenamat (Data Professor) - [Build 12 Data Science Apps with Python and Streamlit](https://www.youtube.com/watch?v=JwSS70SZdyM): that's where I got the idea from.
 - Lloyd Hung - [A Beginner’s Guide: Using the NBA API to obtain data for Shot Charts](https://lloydhung.medium.com/a-beginners-guide-using-the-nba-api-to-obtain-data-for-shot-charts-part-1-799c679f99e1): helped me build the shot chart graph.
