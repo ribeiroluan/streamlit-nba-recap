@@ -5,6 +5,7 @@ import pandas as pd
 #NBA api
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import shotchartdetail
+from nba_api.stats.endpoints import LeagueStandings
 #Visualization
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -23,8 +24,17 @@ st.set_page_config(
 header = st.container()
 awards = st.container()
 leaders = st.container()
+standings = st.container()
 shotchart = st.container()
 pergame = st.container()
+
+#CSS to inject contained in a string
+hide_table_row_index = """
+            <style>
+            thead tr th:first-child {display:none}
+            tbody th {display:none}
+            </style>
+            """
 
 #Firstly, let's create a function that reads data from basketballreference.com and makes the necessary adjustments
 def read_data(year):
@@ -64,7 +74,7 @@ def read_data(year):
 
 with header:
     st.title("NBA Recap :basketball:")
-    st.write("A simple web-app to recap NBA seasons: awards winners, league leaders, shot-charts and complete per game stats!")
+    st.write("A simple web-app to recap NBA seasons: awards winners, league leaders, standings, shot-charts and complete per game stats!")
 
 with st.sidebar:
     st.write("### Input your information here!")
@@ -126,7 +136,8 @@ with awards:
     st.write(f"- **Champions**: {awards_winners['champion']} \n - **Finals Most Valuable Player**: {awards_winners['finals_mvp']} \n - **Defensive Player of the Year**: {awards_winners['dpoy']} \n - **Rookie of the Year**: {awards_winners['roty']} \n - **Most Improved Player**: {awards_winners['mip']} \n - **Sixth Man of the Year**: {awards_winners['sixth_man']}")
 
 with leaders:
-    st.write("## Season leaders")
+    st.markdown("""---""")
+    st.write("## Regular season leaders")
     leaders_df = read_data(year)
     
     #Getting top 5 for each category
@@ -160,7 +171,17 @@ with leaders:
     else:
         st.warning(':warning: Select stats in the sidebar.')
 
+with standings:
+    st.markdown("""---""")
+    st.write("## Regular season standings")
+
+    standings = LeagueStandings(season=year_adjusted).get_data_frames()[0]
+    standings = standings.sort_values(['Conference','PlayoffRank'])[['PlayoffRank', 'Conference', 'TeamName', 'WinPCT', 'Record', 'HOME', 'ROAD', 'PreAS', 'PostAS']]
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    st.table(standings)
+
 with shotchart:
+    st.markdown("""---""")
     st.write("## Shot charts")
 
     if len(shotchart_player)>0:
@@ -245,6 +266,7 @@ with shotchart:
         st.warning(':warning: Write the player name in the sidebar before displaying the shot chart. \n The player name must be written in the following format: firstName lastName.')
 
 with pergame:
+    st.markdown("""---""")
     st.write("## Complete per-game stats")
 
     #Reading data
