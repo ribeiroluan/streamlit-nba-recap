@@ -136,11 +136,12 @@ with awards:
                 'dpoy':awards[awards['year']==year].iloc[0]['dpoy'],
                 'roty':awards[awards['year']==year].iloc[0]['roty'],
                 'mip':awards[awards['year']==year].iloc[0]['mip'],
-                'sixth_man':awards[awards['year']==year].iloc[0]['6th_man']}
+                'sixth_man':awards[awards['year']==year].iloc[0]['6th_man'],
+                'coty':awards[awards['year']==year].iloc[0]['coty']}
 
     awards_winners = get_awards_winners(year)
 
-    st.write(f"- **Champions**: {awards_winners['champion']} \n - **Finals Most Valuable Player**: {awards_winners['finals_mvp']} \n - **Defensive Player of the Year**: {awards_winners['dpoy']} \n - **Rookie of the Year**: {awards_winners['roty']} \n - **Most Improved Player**: {awards_winners['mip']} \n - **Sixth Man of the Year**: {awards_winners['sixth_man']}")
+    st.write(f"- **Champions**: {awards_winners['champion']} \n - **Finals Most Valuable Player**: {awards_winners['finals_mvp']} \n - **Most Valuable Player**: {awards_winners['mvp']} \n - **Defensive Player of the Year**: {awards_winners['dpoy']} \n - **Rookie of the Year**: {awards_winners['roty']} \n - **Most Improved Player**: {awards_winners['mip']} \n - **Sixth Man of the Year**: {awards_winners['sixth_man']} \n - **Coach of the Year**: {awards_winners['coty']}")
 
 with leaders:
     st.markdown("""---""")
