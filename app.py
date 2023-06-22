@@ -282,7 +282,7 @@ with pergame:
         st.write("This is a full per game table based on your selections in the **Per game stats inputs** sidebar section. All teams and positions are automatically selected, but you can change it according to your preferences.")
         st.write("**_Tip_**: you can download your data in MS Excel format on the download button bellow.")
         #Filtering teams and positions
-        pergame = pergame[(pergame['Tm'].isin(teams)) & (pergame['Pos'].isin(positions))]
+        pergame = pergame[(pergame['Tm'].isin(teams)) & (pergame['Pos'].isin(positions))].reset_index(drop=True)
 
         #Showing dataframe
         st.dataframe(pergame)
