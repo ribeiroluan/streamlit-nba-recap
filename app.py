@@ -106,9 +106,16 @@ with st.sidebar:
 
     #Shot chart
     st.write("#### :point_right: Shot chart inputs")
-    #shotchart_player = st.text_input("Type player name for the shot chart")
     players_list = list(read_data(year)['Player'])
-    shotchart_player = st.selectbox("Type player name for the shot chart", players_list, index = players_list.index('Stephen Curry'))
+    if "Stephen Curry" in players_list:
+        default_player = "Stephen Curry"
+    elif "LeBron James" in players_list:
+        default_player = "LeBron James"
+    elif "Kobe Bryant" in players_list:
+        default_player = "Kobe Bryant"
+    else:
+        default_player = "Shaquille O'Neal"
+    shotchart_player = st.selectbox("Type player name for the shot chart", players_list, index = players_list.index(default_player))
     
     #Per game stats
     st.write("#### :point_right: Per game stats inputs")
@@ -184,11 +191,14 @@ with shotchart:
     st.markdown("""---""")
     st.write("## Shot charts")
 
-    if len(shotchart_player)>0:
-        #Description
-        st.write("This is where you can check out regular season shot charts for your favourite players. Just type in the player name in the **Shot chat inputs** sidebar section and we are good to go.")
-        st.write("**_Disclaimer_**: unfortunately, shot chart data only goes back to the 1996-97 season, when the NBA first started tracking play-by-play data.")
+    #Description
+    st.write("This is where you can check out regular season shot charts for your favourite players. Just type in the player name in the **Shot chat inputs** sidebar section and we are good to go.")
+    st.write("**_Disclaimer_**: unfortunately, shot chart data only goes back to the 1996-97 season, when the NBA first started tracking play-by-play data.")
 
+    if year <= 1996:
+        st.warning(':warning: Shot chart data is only available from 1996-97 onwards.')
+    
+    if len(shotchart_player)>0:
         sc_players = players.get_players()
 
         #Function to get a player id based on its full nmame
@@ -203,7 +213,7 @@ with shotchart:
             # Short corner 3PT lines
             ax.plot([-220, -220], [0, 140], linewidth=2, color=color)
             ax.plot([220, 220], [0, 140], linewidth=2, color=color)
-         
+        
             # 3PT Arc
             ax.add_artist(mpl.patches.Arc((0, 140), 440, 315, theta1=0, theta2=180, facecolor='none', edgecolor=color, lw=2))
             
@@ -236,10 +246,10 @@ with shotchart:
 
         #Get player shotlog from ShotChartDetail endpoint
         player_shotlog = shotchartdetail.ShotChartDetail(team_id = 0, 
-                                                 player_id = get_player_id(shotchart_player),
-                                                 context_measure_simple = 'FGA',
-                                                 season_nullable = year_adjusted,
-                                                 season_type_all_star = ['Regular Season', 'Playoffs'])
+                                                player_id = get_player_id(shotchart_player),
+                                                context_measure_simple = 'FGA',
+                                                season_nullable = year_adjusted,
+                                                season_type_all_star = ['Regular Season', 'Playoffs'])
 
         #Extract dataframes
         player_df = player_shotlog.get_data_frames()[0]
@@ -261,9 +271,6 @@ with shotchart:
         ax = create_court(ax, 'black')
         plt.legend(loc="best")
         st.pyplot(fig)
-
-    else:
-        st.warning(':warning: Write the player name in the sidebar before displaying the shot chart. \n The player name must be written in the following format: firstName lastName.')
 
 with pergame:
     st.markdown("""---""")
