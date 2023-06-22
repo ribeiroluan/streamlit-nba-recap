@@ -199,79 +199,80 @@ with shotchart:
     if year <= 1996:
         st.warning(':warning: Shot chart data is only available from 1996-97 onwards.')
     
-    if len(shotchart_player)>0:
-        sc_players = players.get_players()
+    else:
+        if len(shotchart_player)>0:
+            sc_players = players.get_players()
 
-        #Function to get a player id based on its full nmame
-        def get_player_id(fullName):
-            for player in sc_players:
-                if player['full_name'] == fullName:
-                    return player['id']
-            return -1
+            #Function to get a player id based on its full nmame
+            def get_player_id(fullName):
+                for player in sc_players:
+                    if player['full_name'] == fullName:
+                        return player['id']
+                return -1
 
-        #Function to draw basketball court
-        def create_court(ax, color):
-            # Short corner 3PT lines
-            ax.plot([-220, -220], [0, 140], linewidth=2, color=color)
-            ax.plot([220, 220], [0, 140], linewidth=2, color=color)
-        
-            # 3PT Arc
-            ax.add_artist(mpl.patches.Arc((0, 140), 440, 315, theta1=0, theta2=180, facecolor='none', edgecolor=color, lw=2))
+            #Function to draw basketball court
+            def create_court(ax, color):
+                # Short corner 3PT lines
+                ax.plot([-220, -220], [0, 140], linewidth=2, color=color)
+                ax.plot([220, 220], [0, 140], linewidth=2, color=color)
             
-            # Lane and Key
-            ax.plot([-80, -80], [0, 190], linewidth=2, color=color)
-            ax.plot([80, 80], [0, 190], linewidth=2, color=color)
-            ax.plot([-60, -60], [0, 190], linewidth=2, color=color)
-            ax.plot([60, 60], [0, 190], linewidth=2, color=color)
-            ax.plot([-80, 80], [190, 190], linewidth=2, color=color)
-            ax.add_artist(mpl.patches.Circle((0, 190), 60, facecolor='none', edgecolor=color, lw=2))
-            
-            # Rim
-            ax.add_artist(mpl.patches.Circle((0, 60), 15, facecolor='none', edgecolor=color, lw=2))
+                # 3PT Arc
+                ax.add_artist(mpl.patches.Arc((0, 140), 440, 315, theta1=0, theta2=180, facecolor='none', edgecolor=color, lw=2))
+                
+                # Lane and Key
+                ax.plot([-80, -80], [0, 190], linewidth=2, color=color)
+                ax.plot([80, 80], [0, 190], linewidth=2, color=color)
+                ax.plot([-60, -60], [0, 190], linewidth=2, color=color)
+                ax.plot([60, 60], [0, 190], linewidth=2, color=color)
+                ax.plot([-80, 80], [190, 190], linewidth=2, color=color)
+                ax.add_artist(mpl.patches.Circle((0, 190), 60, facecolor='none', edgecolor=color, lw=2))
+                
+                # Rim
+                ax.add_artist(mpl.patches.Circle((0, 60), 15, facecolor='none', edgecolor=color, lw=2))
 
-            # Backboard
-            ax.plot([-30, 30], [40, 40], linewidth=2, color=color)
-            
-            # Remove ticks
-            ax.set_xticks([])
-            ax.set_yticks([])
-            
-            # Set axis limits
-            ax.set_xlim(-250, 250)
-            ax.set_ylim(0, 470)
-            
-            # General plot parameters
-            mpl.rcParams['font.family'] = 'DejaVu Sans'
-            mpl.rcParams['font.size'] = 10
-            mpl.rcParams['axes.linewidth'] = 2
+                # Backboard
+                ax.plot([-30, 30], [40, 40], linewidth=2, color=color)
+                
+                # Remove ticks
+                ax.set_xticks([])
+                ax.set_yticks([])
+                
+                # Set axis limits
+                ax.set_xlim(-250, 250)
+                ax.set_ylim(0, 470)
+                
+                # General plot parameters
+                mpl.rcParams['font.family'] = 'DejaVu Sans'
+                mpl.rcParams['font.size'] = 10
+                mpl.rcParams['axes.linewidth'] = 2
 
-        #Get player shotlog from ShotChartDetail endpoint
-        player_shotlog = shotchartdetail.ShotChartDetail(team_id = 0, 
-                                                player_id = get_player_id(shotchart_player),
-                                                context_measure_simple = 'FGA',
-                                                season_nullable = year_adjusted,
-                                                season_type_all_star = ['Regular Season', 'Playoffs'])
+            #Get player shotlog from ShotChartDetail endpoint
+            player_shotlog = shotchartdetail.ShotChartDetail(team_id = 0, 
+                                                    player_id = get_player_id(shotchart_player),
+                                                    context_measure_simple = 'FGA',
+                                                    season_nullable = year_adjusted,
+                                                    season_type_all_star = ['Regular Season', 'Playoffs'])
 
-        #Extract dataframes
-        player_df = player_shotlog.get_data_frames()[0]
-        player_fgm = player_df.loc[player_df['SHOT_MADE_FLAG']==1]
-        player_missed = player_df.loc[player_df['SHOT_MADE_FLAG']==0]
+            #Extract dataframes
+            player_df = player_shotlog.get_data_frames()[0]
+            player_fgm = player_df.loc[player_df['SHOT_MADE_FLAG']==1]
+            player_missed = player_df.loc[player_df['SHOT_MADE_FLAG']==0]
 
-        # Draw basketball court
-        fig = plt.figure(figsize=(2*4, 2*3.76))
-        ax = fig.add_axes([0, 0, 1, 1])
+            # Draw basketball court
+            fig = plt.figure(figsize=(2*4, 2*3.76))
+            ax = fig.add_axes([0, 0, 1, 1])
 
-        # Add player shots
-        ax.scatter(player_missed['LOC_X'], player_missed['LOC_Y'] + 60, alpha=0.4, color='Red', label='Missed')
-        ax.scatter(player_fgm['LOC_X'], player_fgm['LOC_Y'] + 60, alpha=0.4, color='Green',label='Made')
+            # Add player shots
+            ax.scatter(player_missed['LOC_X'], player_missed['LOC_Y'] + 60, alpha=0.4, color='Red', label='Missed')
+            ax.scatter(player_fgm['LOC_X'], player_fgm['LOC_Y'] + 60, alpha=0.4, color='Green',label='Made')
 
-        # Annotate player name and season
-        ax.text(0, 1.02, f'{shotchart_player}\n{year_adjusted} Regular Season', transform=ax.transAxes, ha='left', va='baseline')
+            # Annotate player name and season
+            ax.text(0, 1.02, f'{shotchart_player}\n{year_adjusted} Regular Season', transform=ax.transAxes, ha='left', va='baseline')
 
-        # Save graph and show plot
-        ax = create_court(ax, 'black')
-        plt.legend(loc="best")
-        st.pyplot(fig)
+            # Save graph and show plot
+            ax = create_court(ax, 'black')
+            plt.legend(loc="best")
+            st.pyplot(fig)
 
 with pergame:
     st.markdown("""---""")
