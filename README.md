@@ -4,9 +4,9 @@
 
 This web app was created as a part of exploring `Streamlit` as a method to deploy data projects. It is directed to people who, like me, love NBA basketball and want to recap the main events from seasons going back to 1980 - award winners, season leaders, shot charts for individual players and per game stats. 
 
-The web app is hosted on the Streamlit Community Cloud, and you can check it out [here](https://nbarecap.streamlit.app/)! 
+The web app is hosted on the Streamlit Community Cloud, and you can check it out for yourself  [here](https://nbarecap.streamlit.app/)! 
 
-Check it out!
+Check out the demo below!
 
 <p align = "center">
     <img src="resources/nba-recap-demo.gif" width = 800>
